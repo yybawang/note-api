@@ -13,7 +13,7 @@ import (
 func main() {
 	r := gin.Default()
 	r.Use(cors.Cors())
-	r.Any("/category", func(c *gin.Context) {
+	r.GET("/category", func(c *gin.Context) {
 		cate, err := category.List()
 		if err != nil {
 			jsonError(c, err)
@@ -22,7 +22,7 @@ func main() {
 		jsonSuccess(c, cate)
 	})
 
-	r.Any("/post", func(c *gin.Context) {
+	r.GET("/post", func(c *gin.Context) {
 		cateId, err := strconv.Atoi(c.Query("cate_id"))
 		if err != nil {
 			jsonError(c, err)
@@ -36,7 +36,7 @@ func main() {
 		jsonSuccess(c, posts)
 	})
 
-	r.Any("/detail", func(c *gin.Context) {
+	r.GET("/detail", func(c *gin.Context) {
 		postId, err := strconv.Atoi(c.Query("post_id"))
 		if err != nil {
 			jsonError(c, err)
